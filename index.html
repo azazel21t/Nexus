@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Linux | Declarative Power, Arch Performance</title>
+    <title>Nexus Linux | Arch Performance, NixOS Declarative Power</title>
     <style>
         * {
             box-sizing: border-box;
@@ -80,7 +80,6 @@
             color: #ffffff;
         }
 
-        /* Logo Image Container - Clean BG Blend */
         .brand-logo-wrapper {
             width: 36px;
             height: 36px;
@@ -187,7 +186,7 @@
         .btn-primary {
             background: linear-gradient(135deg, #8b5cf6, #06b6d4);
             color: #ffffff;
-            padding: 12px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
@@ -246,22 +245,6 @@
             color: #9ca3af;
         }
 
-        .copy-btn {
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: #c084fc;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .copy-btn:hover {
-            background: #374151;
-            color: #e9d5ff;
-        }
-
         .card-body {
             padding: 16px;
             overflow-x: auto;
@@ -269,61 +252,12 @@
             font-size: 0.85rem;
             white-space: pre;
             line-height: 1.6;
-            transition: opacity 0.2s ease;
         }
 
         .syntax-key { color: #38bdf8; }
         .syntax-val { color: #34d399; }
         .syntax-sec { color: #c084fc; }
         .syntax-com { color: #6b7280; }
-
-        /* Interactive Generator */
-        .interactive-box {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 28px;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        .interactive-box h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: #c084fc;
-        }
-
-        .pkg-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .pkg-chip {
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: #9ca3af;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .pkg-chip:hover {
-            border-color: #a855f7;
-            color: #e5e7eb;
-        }
-
-        .pkg-chip.active {
-            background: rgba(168, 85, 247, 0.2);
-            border-color: #a855f7;
-            color: #e9d5ff;
-            font-weight: 600;
-            transform: scale(1.03);
-        }
 
         /* Features */
         .section-title {
@@ -400,150 +334,66 @@
 
     <section class="hero">
         <div class="tag">
-            <span class="pulse-dot"></span> Rust-Powered Build Pipeline
+            <span class="pulse-dot"></span> Arch + NixOS Fusion
         </div>
-        <h1>Declarative Simplicity.<br><span class="highlight">Arch Performance.</span></h1>
+        <h1>Arch Performance.<br><span class="highlight">NixOS Declarative Power.</span></h1>
         <p class="subtitle">
-            Configure your entire distribution in a single <code class="code-font" style="color: #c084fc;">.nex</code> file. Generate live bootable ISOs without Nix store friction.
+            The next-generation operating system combining rolling-release Arch speed with isolated declarative management and a universal 8-package manager bridge.
         </p>
         <div class="btn-group">
-            <a href="#interactive" class="btn-primary">Generate Config</a>
-            <a href="#code" class="btn-secondary">View CLI Output</a>
+            <a href="nexus-live.iso" class="btn-primary">Download Live ISO</a>
+            <a href="#features" class="btn-secondary">Explore Features</a>
         </div>
     </section>
 
     <div class="container">
 
-        <!-- Interactive .nex Builder -->
-        <div class="interactive-box" id="interactive">
-            <h3>Config Builder</h3>
-            <p style="font-size: 0.85rem; color: #9ca3af; margin-bottom: 12px;">Select packages to include in your generated configuration:</p>
-            
-            <div class="pkg-options">
-                <span class="pkg-chip active" onclick="togglePkg(this, 'hyprland')">hyprland</span>
-                <span class="pkg-chip active" onclick="togglePkg(this, 'waybar')">waybar</span>
-                <span class="pkg-chip active" onclick="togglePkg(this, 'neovim')">neovim</span>
-                <span class="pkg-chip" onclick="togglePkg(this, 'alacritty')">alacritty</span>
-                <span class="pkg-chip" onclick="togglePkg(this, 'firefox')">firefox</span>
-                <span class="pkg-chip" onclick="togglePkg(this, 'pipewire')">pipewire</span>
-            </div>
-
-            <div class="card" style="margin-bottom: 0;">
-                <div class="card-header">
-                    <span>example.nex</span>
-                    <button class="copy-btn" id="copy-btn" onclick="copyConfig()">Copy</button>
-                </div>
-                <div class="card-body code-font" id="config-preview"><span class="syntax-com"># Dynamic Nexus Configuration</span>
-<span class="syntax-key">host_packages</span> = [
-    <span class="syntax-val">"base"</span>,
-    <span class="syntax-val">"linux-zen"</span>,
-    <span class="syntax-val">"limine"</span>,
-    <span class="syntax-val">"hyprland"</span>,
-    <span class="syntax-val">"waybar"</span>,
-    <span class="syntax-val">"neovim"</span>
-]
-
-<span class="syntax-sec">[target.iso]</span>
-<span class="syntax-key">bootloader</span> = <span class="syntax-val">"limine"</span>
-<span class="syntax-key">kernel</span>     = <span class="syntax-val">"linux-zen"</span>
-<span class="syntax-key">filesystem</span> = <span class="syntax-val">"squashfs"</span></div>
-            </div>
-        </div>
-
-        <!-- Terminal Build Workflow Card -->
-        <div class="card" id="code">
+        <!-- Terminal Command Preview Card -->
+        <div class="card">
             <div class="card-header">
-                <span>Build Output</span>
-                <span class="code-font" style="color: #34d399;">Active Session</span>
+                <span>Native Package Management CLI</span>
+                <span class="code-font" style="color: #34d399;">Universal Engine</span>
             </div>
-            <div class="card-body code-font"><span class="syntax-com"># Execute build pipeline</span>
-<span class="syntax-key">azazel@auxo-hp14s</span>:<span class="syntax-val">~/nexus</span>$ sudo cargo run -- build-iso
+            <div class="card-body code-font"><span class="syntax-com"># Install packages seamlessly across 8 supported package managers</span>
+<span class="syntax-key">root@nexus</span>:<span class="syntax-val">~</span># nexus install flatpak
 
-==&gt; Initiating Nexus Linux ISO Build Procedure...
---&gt; Bootstrapping rootfs into /tmp/nexus-iso-stage...
---&gt; Staging kernel and bootloader assets...
---&gt; Compressing rootfs into SquashFS...
---&gt; Packing ISO image with xorriso...
-<span class="syntax-val" style="font-weight: bold;">==&gt; Nexus ISO built successfully: nexus-live.iso</span></div>
+<span class="syntax-sec">==&gt; Nexus Universal Package & System Engine</span>
+--&gt; Parsing multi-backend dependency tree...
+--&gt; Integrating package into isolated environment /nexus/store...
+<span class="syntax-val" style="font-weight: bold;">==&gt; Successfully installed flatpak across active backends!</span></div>
         </div>
 
         <!-- Features -->
-        <h2 class="section-title">Why Build with Nexus?</h2>
-        <p class="section-sub">Declarative control meets full Linux compatibility.</p>
+        <h2 class="section-title" id="features">Why Nexus Linux?</h2>
+        <p class="section-sub">Engineered from the ground up for maximum reliability and speed.</p>
 
         <div class="feature-grid">
             <div class="feature-card">
-                <h3>Declarative Setup</h3>
-                <p>Single configuration blueprint to track packages, kernel choices, and system layout without bash script clutter.</p>
+                <h3>Arch + NixOS Hybrid</h3>
+                <p>Combines the raw bleeding-edge performance and vast repository of Arch Linux with modern declarative system structuring.</p>
             </div>
 
             <div class="feature-card">
-                <h3>Standard FHS</h3>
-                <p>No non-standard path wrappers. Everything sits in normal /usr/bin directories so AUR and precompiled binaries work out-of-the-box.</p>
+                <h3>8 Package Managers</h3>
+                <p>Features a custom universal abstraction layer capable of routing and managing packages across 8 distinct package management backends.</p>
             </div>
 
             <div class="feature-card">
-                <h3>Rust Orchestrated</h3>
-                <p>CLI built in Rust using strict sysroot validation, fast SquashFS compression, and modern Limine volume pathing.</p>
+                <h3>Innovative Core Engine</h3>
+                <p>Powered by a lightning-fast, memory-safe systems language ensuring zero-cost abstractions, rapid ISO building, and atomic deployment.</p>
             </div>
 
             <div class="feature-card">
-                <h3>Hybrid Bootable</h3>
-                <p>Outputs clean UEFI/BIOS ISOs ready for immediate QEMU testing or writing directly to a USB stick.</p>
+                <h3>Hybrid Boot Ready</h3>
+                <p>Ships with out-of-the-box Limine bootloader support for seamless booting across both modern UEFI and legacy BIOS hardware.</p>
             </div>
         </div>
 
     </div>
 
     <footer>
-        <p>Nexus Linux — Built with Rust, Arch Linux, and Limine Bootloader.</p>
+        <p>Nexus Linux — Built with Arch Linux, Limine, and next-gen systems tooling.</p>
     </footer>
 
-    <script>
-        let selectedPkgs = ["hyprland", "waybar", "neovim"];
-
-        function togglePkg(el, pkgName) {
-            el.classList.toggle('active');
-            if (selectedPkgs.includes(pkgName)) {
-                selectedPkgs = selectedPkgs.filter(p => p !== pkgName);
-            } else {
-                selectedPkgs.push(pkgName);
-            }
-            renderConfig();
-        }
-
-        function renderConfig() {
-            const preview = document.getElementById('config-preview');
-            preview.style.opacity = '0.5';
-
-            setTimeout(() => {
-                const basePkgs = ['"base"', '"linux-zen"', '"limine"'];
-                const customPkgs = selectedPkgs.map(p => `"${p}"`);
-                const allPkgs = [...basePkgs, ...customPkgs].map(p => `    <span class="syntax-val">${p}</span>`).join(',\n');
-
-                preview.innerHTML = 
-`<span class="syntax-com"># Dynamic Nexus Configuration</span>
-<span class="syntax-key">host_packages</span> = [
-${allPkgs}
-]
-
-<span class="syntax-sec">[target.iso]</span>
-<span class="syntax-key">bootloader</span> = <span class="syntax-val">"limine"</span>
-<span class="syntax-key">kernel</span>     = <span class="syntax-val">"linux-zen"</span>
-<span class="syntax-key">filesystem</span> = <span class="syntax-val">"squashfs"</span>`;
-                preview.style.opacity = '1';
-            }, 100);
-        }
-
-        function copyConfig() {
-            const rawText = document.getElementById('config-preview').innerText;
-            navigator.clipboard.writeText(rawText);
-            const btn = document.getElementById('copy-btn');
-            btn.innerText = 'Copied!';
-            setTimeout(() => {
-                btn.innerText = 'Copy';
-            }, 1500);
-        }
-    </script>
 </body>
 </html>
